@@ -1,0 +1,15 @@
+sudo apt-get install inetutils-inetd fingerd
+sudo service inetutils-inetd status
+sudo service inetutils-inetd stop
+sudo service inetutils-inetd start
+
+mcedit /etc/inetd.conf
+
+sudo update-inetd --enable finger
+sudo update-inetd --disable finger
+sudo update-inetd --enable daytime
+sudo update-inetd --disable daytime
+
+sudo journalctl -u finger2023.socket
+sudo systemctl daemon-reload
+sudo systemctl status finger2023.socket
