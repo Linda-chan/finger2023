@@ -6,6 +6,13 @@ Misc/
 Rejected/
 Old Versions/
 
+# Linux entries...
+backups/
+test/
+tests/
+misc/
+rejected/
+
 # Service files...
 git*.sh
 curl-ca-bundle.crt
