@@ -1,0 +1,36 @@
+# /etc/systemd/system/finger2023@.service
+
+[Unit]
+Description=Finger Server 2023
+Requires=finger2023.socket
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/finger2023
+EnvironmentFile=/etc/default/finger2023.env
+StandardInput=socket
+StandardError=journal
+
+# Syslog identifier so you can have these logs filtered...
+SyslogIdentifier=finger2023
+
+# User other than root...
+User=www-data
+Group=www-data
+
+# Hardening
+ProtectSystem=strict
+#ReadWritePaths=/var/lib
+#StateDirectory=vnstat
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+ProtectHome=yes
+ProtectKernelModules=yes
+PrivateTmp=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+
+[Install]
+WantedBy=multi-user.target

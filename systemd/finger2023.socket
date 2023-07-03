@@ -1,0 +1,11 @@
+# /etc/systemd/system/finger2023.socket
+
+[Unit]
+Description=Finger Server 2023
+
+[Socket]
+ListenStream=79
+Accept=yes
+
+[Install]
+WantedBy=sockets.target
