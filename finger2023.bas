@@ -214,6 +214,10 @@ End Function
 '====================================================================
 ' Странное разделение строк на слэш и символ сделано для того, чтобы 
 ' при включении ворнингов компилятор на это не жаловался...
+' 
+' Отныне вместо разделения строк прямо указываем, что ескейпы 
+' не нужны. Делается это баксом перед строкой. Если вдруг, 
+' восклицательный перед строкой включает ескейпы.
 '====================================================================
 Private Function EscapeText(ByVal TXT As String) As String
 	Dim TMP As Long
@@ -223,14 +227,14 @@ Private Function EscapeText(ByVal TXT As String) As String
 	For TMP = 1 To Len(TXT)
 		Ch = Mid(TXT, TMP, 1)
 		Select Case Ch
-			Case NUL:   Ch = "\" & "0"
-			Case CR:    Ch = "\" & "r"
-			Case LF:    Ch = "\" & "n"
-			Case A_TAB: Ch = "\" & "t"
-			Case V_TAB: Ch = "\" & "v"
-			Case BS:    Ch = "\" & "b"
-			Case FF:    Ch = "\" & "f"
-			Case BEL:   Ch = "\" & "a"
+			Case NUL:   Ch = $"\0"
+			Case CR:    Ch = $"\r"
+			Case LF:    Ch = $"\n"
+			Case A_TAB: Ch = $"\t"
+			Case V_TAB: Ch = $"\v"
+			Case BS:    Ch = $"\b"
+			Case FF:    Ch = $"\f"
+			Case BEL:   Ch = $"\a"
 		End Select
 		TXT2 = TXT2 & Ch
 	Next TMP
