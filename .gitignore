@@ -13,6 +13,9 @@ tests/
 misc/
 rejected/
 
+# Output directory should be local...
+output/
+
 # Service files...
 git*.sh
 curl-ca-bundle.crt
