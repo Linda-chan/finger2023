@@ -28,6 +28,6 @@ if [[ "$?" == "0" ]] ; then
 	if [[ "$1" == "--update" ]] ; then
 		sudo cp "output/finger2023" "/usr/bin/finger2023"
 		sudo chown root:root "/usr/bin/finger2023"
-		sudo chmod 755 "/usr/bin/finger2023"
+		sudo chmod 644 "/usr/bin/finger2023"
 	fi
 fi
