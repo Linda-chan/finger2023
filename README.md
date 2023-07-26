@@ -183,5 +183,5 @@ sudo systemctl disable finger2023.socket
 
 ## Контакты
 
-Почта: lindaoneesama@gmail.com
+Почта: lindaoneesama@gmail.com  
 Сайт:  https://www.lindachan.net
