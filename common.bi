@@ -25,3 +25,16 @@
 #define MyLTrim2(param) LTrim(param, Any !" \t\r\n")
 #define MyRTrim(param) RTrim(param, Any !" \t")
 #define MyRTrim2(param) RTrim(param, Any !" \t\r\n")
+
+' Проверяет, открыт ли файл, и закрывает его, если открыт. Дело 
+' в том, что в VB закрытие неоткрытого файла не вызывает ошибки, 
+' а в FB – вызывает =_=
+' 
+' Так же проверяем сам номер файла. Дело в том, что тот же 0 хоть 
+' и не верен, но FileAttr() для него вернёт какой-то хэндл! ХЗ что 
+' это, но допускать такого нельзя!
+#macro MyClose ? (file_num)
+	If file_num > 0 And file_num < 256 Then _
+		If FileAttr(file_num, fbFileAttrHandle) <> 0 Then _
+			Close file_num
+#endmacro

@@ -105,9 +105,9 @@ Public Sub CloseHandles(ByRef h As HANDLES)
 	' Сюда мы попадаем при нормальном завершении программы и при 
 	' ошибке инициализации программы в OpenHandles(), так что 
 	' проверяем, открыт ли вообще хэндл. На всякий случай...
-	If h.StdOut <> 0 Then Close #h.StdOut
-	If h.StdIn  <> 0 Then Close #h.StdIn
-	If h.StdErr <> 0 Then Close #h.StdErr
+	MyClose h.StdOut
+	MyClose h.StdIn
+	MyClose h.StdErr
 End Sub
 
 '====================================================================
@@ -173,13 +173,13 @@ Private Function GetFileContents(ByVal FileName As String) As String
 	Open FileName For Input As #hFile
 		'Text = Input(LOF(hFile), #hFile)
 		Text = Input(MAX_BUFFER, #hFile)
-	Close #hFile
+	MyClose hFile
 	
 	' Возвращаем полученное!
 	Return Text
 	
 hError:
-	Close #hFile
+	MyClose hFile
 	Return ""
 End Function
 
