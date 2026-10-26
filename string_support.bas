@@ -45,10 +45,17 @@ Public Function Replace(ByVal Expression As String, _
   Dim LastIndex As Integer
   
   ' Так в VB6!
-  If Count = 0 Then
-    Replace = Expression
-    Exit Function
-  End If
+  If Count = 0 Then _
+    Return Expression
+  
+  ' Заменять нечего – выходим!
+  If Len(FindWhat) <= 0 Then _
+    Return Expression
+  
+  ' Больше это у нас нигде не используется, поэтому заранее приводим 
+  ' к верхнему регистру, чтобы каждый раз это не делать...
+  If Not CaseSensitive Then _
+    FindWhat = UCase(FindWhat)
   
   ' StartAt в VB6 на самом деле не начинал замену с указанного 
   ' индекса, а обрезал строку! =_=
@@ -79,11 +86,10 @@ Public Function Replace(ByVal Expression As String, _
     If CaseSensitive Then
       RC = InStr(LastIndex, Expression, FindWhat)
     Else
-      RC = InStr(LastIndex, UCase(Expression), UCase(FindWhat))
+      RC = InStr(LastIndex, UCase(Expression), FindWhat)
     End If
     If RC = 0 Then
-      Replace = Expression
-      Exit Function
+      Return Expression
     Else
       'Print RC
       'Print """" & Left(Expression, RC - 1) & """"
@@ -99,10 +105,8 @@ Public Function Replace(ByVal Expression As String, _
       ' нам легче считать.
       If Count > 0 Then
         Count = Count - 1
-        If Count <= 0 Then
-          Replace = Expression
-          Exit Function
-        End If
+        If Count <= 0 Then _
+          Return Expression
       End If
     End If
   Loop
